@@ -1,0 +1,20 @@
+program pendulum
+  implicit none
+
+  real:: l, ang, g=9.81, pi=3.1415,angr, P_0,p, n,f
+  integer:: i
+  print*, "inserta la longitud de la cuerda"
+  read*, l
+  P_0=(2*pi)*sqrt(l/g)
+  open(1,file='tabla.dat',status='unknown')
+  Do i=0,90 
+     angr=2*pi*i/180
+     p=(2*pi)*sqrt(l/g)*f(angr)
+     write(1,*) angr, p/P_0
+  end  do
+ end program pendulum
+
+ function f(angr)
+   real,intent(in):: angr
+   f=(1+(1/16)*angr**2+(11/3072)*angr**4+(173/737280)*angr**6+(22931/1321205760)*angr**8)
+   end function f
